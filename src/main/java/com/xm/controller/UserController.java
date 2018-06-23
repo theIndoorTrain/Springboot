@@ -21,15 +21,7 @@ public class UserController {
 	}
 	
 	@PostMapping("/user")
-	public String addUser(@Valid User user,BindingResult result) {
-		if(result.hasErrors()) {
-			
-			 List<FieldError> fieldErrors = result.getFieldErrors();
-			for(FieldError error : fieldErrors) {
-				System.out.println(error.getDefaultMessage());
-			}
-			return fieldErrors.toString();
-		}
+	public String addUser(@Valid User user) {
 		return user.toString();
 	}
 
