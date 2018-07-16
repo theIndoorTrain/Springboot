@@ -25,4 +25,12 @@ public interface EmailService {
 	 * @param attachment：附件
 	 */
 	void sendAttachmentEmail(String to,String subject,String content,File attachment);
+	
+	/**
+	 * 发送模板邮件
+	 * @param to：收件人
+	 * @param subject： 标题
+	 * @param info：模板名
+	 */
+	void sendTemplateMail(String to,String subject,String info);
 }

@@ -11,6 +11,8 @@ import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
+import org.thymeleaf.TemplateEngine;
+import org.thymeleaf.context.Context;
 
 import com.xm.service.EmailService;
 /**
@@ -28,6 +30,10 @@ public class EmailServiceImpl implements EmailService {
 	//定义邮件发送者
 	@Autowired
 	private JavaMailSender sender;
+	
+	@Autowired
+	//模板解析
+	private TemplateEngine templateEngine;
 
 	@Override
 	public void sendSimpleEmail(String to, String subject,String content) {
@@ -61,6 +67,32 @@ public class EmailServiceImpl implements EmailService {
 			e.printStackTrace();
 		}
 		sender.send(message);
+	}
+
+	@Override
+	public void sendTemplateMail(String to, String subject, String info) {
+		//创建多用途互联网邮件
+				MimeMessage message = sender.createMimeMessage();
+				
+				try {
+					//封装多用途互联网邮件
+					MimeMessageHelper helper = new MimeMessageHelper(message, true);
+					helper.setFrom(from);
+					helper.setTo(to);
+					helper.setSubject(subject);
+					//封装模板参数
+					Context context = new Context();
+					context.setVariable("id", 1);
+					//解析模板
+					String content = templateEngine.process(info, context);
+					
+					//true:识别Html
+					helper.setText(content, true);
+					
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+				sender.send(message);
 	}
 
 }
