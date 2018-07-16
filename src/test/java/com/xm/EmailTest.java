@@ -1,5 +1,7 @@
 package com.xm;
 
+import java.io.File;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,4 +25,13 @@ public class EmailTest {
 		emailService.sendSimpleEmail("1373572467@qq.com", "122", "Hello Mail!");
 	}
 
+	@Test
+	/**
+	 * 多用途互联网邮件
+	 */
+	public void sendAttachmentEmail() {
+		File attachment = new File("src/main/resources/static/1.txt");
+		emailService.sendAttachmentEmail("1373572467@qq.com", "122", "Hello Mail!",attachment);
+	}
+	
 }
