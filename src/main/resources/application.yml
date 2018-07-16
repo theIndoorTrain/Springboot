@@ -1,0 +1,24 @@
+#配置邮箱
+spring:
+  mail:
+    host: smtp.qq.com
+    username: 1373572467@qq.com
+    password: 
+    default-encoding:  UTF-8
+#   properties:
+#      mail: 
+#        smtp: 
+#          auth: true
+#          starttls: 
+#            enable: true
+#            required: true
+ 
+ #配置邮件发送人
+mail: 
+  from: 
+    addr: 1373572467@qq.com
+      
+      
+    
+ 
+      
